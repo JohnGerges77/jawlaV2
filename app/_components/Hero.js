@@ -7,16 +7,16 @@ import { useRouter } from 'next/navigation';
 function Hero() {
   const router = useRouter();
 
-  const isAuthenticated = () => {
+  // const isAuthenticated = () => {
 
-    return !!localStorage.getItem('token'); 
-  };
+  //   return !!localStorage.getItem('token'); 
+  // };
 
-  useEffect(() => {
-    if (!isAuthenticated()) {
-      router.push('LogIn'); 
-    }
-  }, [router]);
+  // useEffect(() => {
+  //   if (!isAuthenticated()) {
+  //     router.push('LogIn'); 
+  //   }
+  // }, [router]);
 
 
   return (

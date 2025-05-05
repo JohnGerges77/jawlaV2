@@ -138,7 +138,7 @@ const TripsTable = ({ trips, handleEdit, handleDelete }) => {
                                     title: "Are you sure?",
                                     text: "Do you want to delete the trip? This action cannot be undone!",
                                     icon: "warning",
-                                    background: "#000000",
+                                    background: "#11285f",
                                     color: "#ffffff",
                                     showCancelButton: true,
                                     confirmButtonColor: "#d33",
@@ -151,7 +151,8 @@ const TripsTable = ({ trips, handleEdit, handleDelete }) => {
                                       Swal.fire(
                                         "Deleted!",
                                         "The trip has been deleted successfully.",
-                                        "success"
+                                        "success",
+                                    
                                       );
                                       setOpenDropdownId(null);
                                     }

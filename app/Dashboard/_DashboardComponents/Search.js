@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image"; // ✅ استيراد Image من Next.js
+import Image from "next/image"; 
 
 function Search() {
   return (

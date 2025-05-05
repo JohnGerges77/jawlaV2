@@ -4,7 +4,7 @@ import axios from "axios";
 const getAuthHeaders = () => {
   const token = localStorage.getItem("token"); 
 
-  // 🔹 احصل على التوكن المخزن
+  
   return {
     headers: { Authorization: `Bearer ${token}` }, // ✅ تمرير التوكن في الهيدر
   };
@@ -16,7 +16,7 @@ export const addToFavorites = async (tripId) => {
   try {
     const response = await axios.post(
       `https://aldeeb.runasp.net/api/Favorite/add/${tripId}`,
-      {}, // ✅ تأكد أن API لا تحتاج بيانات أخرى
+      {}, 
       getAuthHeaders()
     );
     return response.data;
@@ -40,16 +40,15 @@ export const removeFromFavorites = async (tripId) => {
   }
 };
 
-// ✅ جلب الرحلات المفضلة
+
 export const getFavorites = async () => {
   try {
     const response = await axios.get(`https://aldeeb.runasp.net/api/Favorite/list`, getAuthHeaders());
    
 
-   
     return response.data?.favorites || [];
   } catch (error) {
     console.error("Error fetching favorite trips:", error);
-    return []; // ✅ إرجاع مصفوفة فارغة عند الفشل
+    return []; 
   }
 };

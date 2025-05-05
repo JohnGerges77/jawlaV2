@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { getProfile } from '../servicesApi/ProfileApi'; // ✅ استيراد API
+import { getProfile } from '../servicesApi/ProfileApi'; 
+import Spinner from './Spinner';
 
 function PersonalInfo() {
   const [userData, setUserData] = useState(null);
@@ -22,7 +23,7 @@ function PersonalInfo() {
   }, []);
 
   if (loading) {
-    return <p className="text-white text-center">Loading profile...</p>;
+    return <Spinner />;
   }
 
   if (!userData) {

@@ -11,8 +11,8 @@ function Header() {
    bg-gradient-to-br from-[#052563] to-[#000000]'>
 <h1 className='w-fit text-[white] text-[1.5em] font-bold'>{pageName}</h1>
       <div className='w-fit ml-auto flex items-center space-x-[1em] px-[1em]'>
-        <Search />
-        <Notifications />
+        {/* <Search /> */}
+        {/* <Notifications /> */}
         <ProfileIcon />
       </div>
     </header>

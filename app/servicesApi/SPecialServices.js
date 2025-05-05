@@ -76,6 +76,7 @@ export const bookCustomService = async (customServiceData) => {
     throw new Error(error.response?.data?.message || "Failed to book the custom service. Please try again.");
   }
 }
+
 export const deleteSpecialService = async (type, id) => {
   const token = localStorage.getItem("token");
   if (!token) {

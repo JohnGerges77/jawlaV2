@@ -58,38 +58,38 @@ export default function TripDetailsPage() {
   const images = Array.isArray(trip.images) ? trip.images : [];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#192233] to-[#0c1f47] text-white p-6 md:p-12 rounded-lg">
+    <div className="min-h-screen  text-white p-6 md:p-12 rounded-lg">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-4xl font-extrabold mb-4 tracking-tight">{trip.title || "N/A"}</h2>
         <p className="text-gray-300 mb-8 text-lg leading-relaxed">{trip.description || "No description available"}</p>
 
         <div className="space-y-6">
-          <div className="flex items-center justify-between px-6 py-4 text-lg font-semibold bg-gradient-to-r from-gray-800 to-gray-700 rounded-xl shadow-md transition-all hover:shadow-lg">
+          <div className="flex items-center justify-between px-6 py-4 text-lg font-semibold bg-gradient-to-br from-[#0c1f47] to-[#161132] rounded-xl shadow-md transition-all hover:shadow-lg">
             <span>ID</span>
             <span>{trip.id}</span>
           </div>
 
-          <div className="flex items-center justify-between px-6 py-4 text-lg font-semibold bg-gradient-to-r from-gray-800 to-gray-700 rounded-xl shadow-md transition-all hover:shadow-lg">
+          <div className="flex items-center justify-between px-6 py-4 text-lg font-semibold bg-gradient-to-br from-[#0c1f47] to-[#161132] rounded-xl shadow-md transition-all hover:shadow-lg">
             <span>Location</span>
             <span>{trip.location || "N/A"}</span>
           </div>
 
-          <div className="flex items-center justify-between px-6 py-4 text-lg font-semibold bg-gradient-to-r from-gray-800 to-gray-700 rounded-xl shadow-md transition-all hover:shadow-lg">
+          <div className="flex items-center justify-between px-6 py-4 text-lg font-semibold bg-gradient-to-br from-[#0c1f47] to-[#161132] rounded-xl shadow-md transition-all hover:shadow-lg">
             <span>Start Date</span>
             <span>{trip.start_date ? new Date(trip.start_date).toLocaleDateString("en-US") : "N/A"}</span>
           </div>
 
-          <div className="flex items-center justify-between px-6 py-4 text-lg font-semibold bg-gradient-to-r from-gray-800 to-gray-700 rounded-xl shadow-md transition-all hover:shadow-lg">
+          <div className="flex items-center justify-between px-6 py-4 text-lg font-semibold bg-gradient-to-br from-[#0c1f47] to-[#161132] rounded-xl shadow-md transition-all hover:shadow-lg">
             <span>State</span>
             <span>{trip.state || "N/A"}</span>
           </div>
 
-          <div className="flex items-center justify-between px-6 py-4 text-lg font-semibold bg-gradient-to-r from-gray-800 to-gray-700 rounded-xl shadow-md transition-all hover:shadow-lg">
+          <div className="flex items-center justify-between px-6 py-4 text-lg font-semibold bg-gradient-to-br from-[#0c1f47] to-[#161132] rounded-xl shadow-md transition-all hover:shadow-lg">
             <span>Type</span>
             <span>{trip.types || "N/A"}</span>
           </div>
 
-          <div className="px-6 py-4 bg-gradient-to-r from-gray-800 to-gray-700 rounded-xl shadow-md">
+          <div className="px-6 py-4 bg-gradient-to-br from-[#0c1f47] to-[#161132] rounded-xl shadow-md">
             <h3 className="text-xl font-semibold mb-4">Places</h3>
             {images.length > 0 ? (
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
@@ -109,7 +109,7 @@ export default function TripDetailsPage() {
             )}
           </div>
 
-          <div className="px-6 py-4 bg-gradient-to-r from-gray-800 to-gray-700 rounded-xl shadow-md">
+          <div className="px-6 py-4 bg-gradient-to-br from-[#0c1f47] to-[#161132] rounded-xl shadow-md">
             <h3 className="text-xl font-semibold mb-4">Cars</h3>
             {trip.cars?.length > 0 ? (
               <ul className="list-disc pl-5 text-gray-200">
@@ -124,7 +124,7 @@ export default function TripDetailsPage() {
             )}
           </div>
 
-          <div className="px-6 py-4 bg-gradient-to-r from-gray-800 to-gray-700 rounded-xl shadow-md">
+          <div className="px-6 py-4 bg-gradient-to-br from-[#0c1f47] to-[#161132] rounded-xl shadow-md">
             <h3 className="text-xl font-semibold mb-4">Tour Guides</h3>
             {trip.tourguides?.length > 0 ? (
               <ul className="list-disc pl-5 text-gray-200">
@@ -139,8 +139,8 @@ export default function TripDetailsPage() {
             )}
           </div>
 
-          {/* ⬅️ قسم جديد للحجوزات */}
-          <div className="px-6 py-4 bg-gradient-to-r from-gray-800 to-gray-700 rounded-xl shadow-md">
+        
+          <div className="px-6 py-4 bg-gradient-to-br from-[#0c1f47] to-[#161132] rounded-xl shadow-md">
             <h3 className="text-xl font-semibold mb-4">Reservations</h3>
             {reservationsLoading ? (
               <p className="text-gray-400">Loading reservations...</p>
@@ -148,9 +148,9 @@ export default function TripDetailsPage() {
               <ul className="list-disc pl-5 text-gray-200">
                 {reservations.map((reservation) => (
                   <li key={reservation.id} className="mb-2">
-                    ID: {reservation.id} - User: {reservation.userName || "N/A"} - 
-                    Status: {reservation.status || "N/A"} - 
-                    Date: {reservation.date ? new Date(reservation.date).toLocaleDateString("en-US") : "N/A"}
+                    ID: {reservation.user_Id} - 
+                    Total Price: {reservation.total_price || "N/A"} - 
+                    Date: {reservation.dateCreated}
                   </li>
                 ))}
               </ul>
@@ -159,7 +159,7 @@ export default function TripDetailsPage() {
             )}
           </div>
 
-          <div className="flex flex-col sm:flex-row justify-between items-center bg-gradient-to-r from-gray-800 to-gray-700 p-6 rounded-xl shadow-md mt-6">
+          <div className="flex flex-col sm:flex-row justify-between items-center bg-gradient-to-br from-[#0c1f47] to-[#161132] p-6 rounded-xl shadow-md mt-6">
             <div className="mb-4 sm:mb-0">
               <span className="text-2xl font-bold">
                 {trip.price ? `${trip.price.toLocaleString()} L.E` : "N/A"}

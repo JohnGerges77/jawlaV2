@@ -1,10 +1,11 @@
+import Link from 'next/link'
 import React from 'react'
 
 function Favourites() {
   return (
     <div className='w-[75%] mx-auto mt-[2em]  
     h-fit px-[1em] py-[1em] bg-gradient-to-r from-[#FFFFFF40] to-[#FFFFFF1A] rounded-[1em]'>
-    <a href="/Favorites">
+    <Link href="/Favorites">
       <div className='flex items-center space-between w-[100%] h-fit'>
         <nav className='flex w-full items-center justify-between'>
           <div className='flex items-center space-x-[1em] w-[75%]'>
@@ -16,7 +17,7 @@ function Favourites() {
           </button>
         </nav>
       </div>
-    </a>
+    </Link>
   </div>
   )
 }

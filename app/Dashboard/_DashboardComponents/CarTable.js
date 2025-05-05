@@ -85,7 +85,7 @@ const CarTable = ({ cars, handleEdit, handleDelete }) => {
           </table>
         </div>
 
-        {/* Pagination controls */}
+  
         <div className="flex justify-center items-center mt-3 space-x-2">
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}

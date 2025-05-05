@@ -13,8 +13,8 @@ function BookingDetails() {
   const id = searchParams.get("id");
   const [booking, setBooking] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [price, setPrice] = useState("");
-  const [selectedState, setSelectedState] = useState("Pending"); // لتخزين الـ state المختار
+  const [price, setPrice] = useState(0);
+  const [selectedState, setSelectedState] = useState("Pending");
   const router = useRouter();
 
   useEffect(() => {
@@ -32,8 +32,8 @@ function BookingDetails() {
 
         const foundBooking = allBookings.find((b) => String(b.id) === String(id));
         setBooking(foundBooking);
-        setPrice(foundBooking?.price || "");
-        setSelectedState(foundBooking?.state || "Pending"); // نعرض الـ state الحالي
+        setPrice(foundBooking?.price || '');
+        setSelectedState(foundBooking?.state || "Pending");
         setLoading(false);
       } catch (error) {
         console.error("Error fetching booking details:", error);
@@ -45,20 +45,25 @@ function BookingDetails() {
   }, [id]);
 
   const getBookingType = (booking) => {
-    if (booking.receivePlace || booking.carType) return "car";
-    if (booking.startPlace || booking.destinations) return "tourGuide";
+    if (booking.receivePlace ) return "car";
+    if (booking.startPlace || booking.destinations) return "tour guide";
     if (booking.description) return "package";
     return null;
   };
 
   const handleDelete = async () => {
-    if (!booking) return;
+    if (!booking) {
+      toast.error("No booking found to delete.");
+      return;
+    }
 
     const type = getBookingType(booking);
     if (!type) {
       toast.error("Unable to determine booking type.");
       return;
     }
+
+    console.log(`Attempting to delete: type=${type}, id=${id}`);
 
     try {
       await deleteSpecialService(type, id);
@@ -79,17 +84,11 @@ function BookingDetails() {
       return;
     }
 
-    if (!price || price.trim() === ""|| isNaN(price)) {
-      toast.error("Please enter a price before updating the state.");
-      return;
-    }
-
     try {
       await updateSpecialServiceState(type, id, selectedState, price);
       toast.success(`Booking state updated to ${selectedState}!`);
       setTimeout(() => {
-        
-        router.push('/Dashboard/Custom_Programs')
+        router.push('/Dashboard/Custom_Programs');
       }, 2000);
       setBooking({ ...booking, state: selectedState, price: price });
     } catch (error) {
@@ -99,7 +98,7 @@ function BookingDetails() {
   };
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (!booking) {
@@ -139,7 +138,8 @@ function BookingDetails() {
           <input
             type="text"
             value={price}
-            onChange={(e) => setPrice(e.target.value)}
+         
+            onChange={(e) => setPrice(e.target.value)||0}
             className="w-full p-2 rounded bg-[#1E2D4B] text-[#F2CD7E] border border-gray-600 focus:outline-none focus:border-[#F2CD7E]"
             placeholder="Enter price (required)"
           />

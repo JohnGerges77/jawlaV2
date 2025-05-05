@@ -82,7 +82,7 @@ const TravelDetails = () => {
             <h3 className="text-xl font-semibold mb-2">Places</h3>
             <div className="flex space-x-3 w-[80%]">
        
-              {images.slice(0, 3).map((image, index) => (
+              {images.map((image, index) => (
                 <Image
                   key={index}
                   src={image}

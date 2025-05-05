@@ -83,7 +83,7 @@ className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-
             className="w-full py-3 px-4 bg-primary border rounded-xl"
           />
           <input
-            type="text"
+            type="date"
             name="start_date"
             value={newTrip.start_date}
             onChange={handleInputChange}
@@ -134,15 +134,18 @@ className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-
             <option value="Inactive">Inactive</option>
           </select>
 
-          <input
-            type="text"
+          <select
+        
             name="types"
             value={newTrip.types}
             onChange={handleInputChange}
-            placeholder="Trip Type (e.g., VIP)"
+        
             className="w-full py-3 px-4 bg-primary border rounded-xl"
-          />
+          >
+               <option value="">normal</option>
+            <option value="Active">vip</option>
 
+     </select>
           <input
             type="file"
             name="main_image"

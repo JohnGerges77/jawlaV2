@@ -1,4 +1,5 @@
-"use client";
+
+'use client'
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useMemo, useState } from "react";
@@ -6,7 +7,7 @@ import { addToFavorites, removeFromFavorites, getFavorites } from "../servicesAp
 import { useFavorites } from "../context/FavoritesContext";
 import { toast } from "react-toastify";
 
-function TripCard({ id, title, location, main_Image, type, price, duration }) {
+function TripCard({ id, title, location, main_Image, type, price, duration, onDelete }) {
   const { favoriteTrips, addFavorite, removeFavorite } = useFavorites();
   const [isFavorite, setIsFavorite] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -18,7 +19,7 @@ function TripCard({ id, title, location, main_Image, type, price, duration }) {
       try {
         const token = localStorage.getItem("token");
         if (!token) {
-          setIsFavorite(false); // لو مفيش token، يعني مش مفضلة
+          setIsFavorite(false); 
           setLoading(false);
           return;
         }
@@ -35,7 +36,6 @@ function TripCard({ id, title, location, main_Image, type, price, duration }) {
     fetchFavorites();
   }, [favoriteTrips, id]);
 
-  // ✅ تحديث حالة المفضلة عند الضغط على القلب مع التحقق من تسجيل الدخول
   const handleFavoriteToggle = async () => {
     if (!id) return console.error("⚠️ خطأ: الرحلة ليس لها معرف ID!");
 
@@ -48,13 +48,13 @@ function TripCard({ id, title, location, main_Image, type, price, duration }) {
     try {
       if (isFavorite) {
         await removeFavorite(id);
-        setIsFavorite(false); // تحديث الحالة محليًا
+        setIsFavorite(false); 
       } else {
         await addFavorite(id);
-        setIsFavorite(true); // تحديث الحالة محليًا
+        setIsFavorite(true); 
       }
     } catch (error) {
-      console.error("⚠️ فشل في تحديث المفضلات:", error);
+      console.error(error);
     }
   };
 
@@ -119,10 +119,20 @@ function TripCard({ id, title, location, main_Image, type, price, duration }) {
             </div>
           </div>
 
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
+          {!onDelete && (
             <Link href={`/Detail?id=${id}`} className="bg-primary text-white pt-1 px-2 h-8 rounded-xl">
               Book Now
             </Link>
+              )}
+            {onDelete && (
+              <button 
+                onClick={onDelete} 
+                className="bg-red-500 text-white pt-1 px-2 h-8 rounded-xl hover:bg-red-600"
+              >
+                Delete
+              </button>
+            )}
           </div>
         </div>
       </div>

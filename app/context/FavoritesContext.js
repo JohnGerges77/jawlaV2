@@ -15,7 +15,7 @@ export function FavoritesProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // التحقق من وجود الـ token
+  
     const token = localStorage.getItem("token");
     if (!token) {
       setFavoriteTrips([]); 
