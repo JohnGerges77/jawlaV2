@@ -1,10 +1,10 @@
-"use client";
+'use client'
 import { createContext, useContext, useEffect, useState } from "react";
 import {
   getFavorites,
   addToFavorites,
   removeFromFavorites,
-} from "../servicesApi/FavoritesApi"; // تأكدي من المسار
+} from "../servicesApi/FavoritesApi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -14,27 +14,26 @@ export function FavoritesProvider({ children }) {
   const [favoriteTrips, setFavoriteTrips] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-  
-    const token = localStorage.getItem("token");
-    if (!token) {
-      setFavoriteTrips([]); 
-      setLoading(false); 
-      return; 
-    }
 
-    const fetchFavorites = async () => {
-      try {
-        const response = await getFavorites();
-        setFavoriteTrips(Array.isArray(response) ? response : []);
-      } catch (error) {
-        console.error("Failed to get favorites", error);
+  const fetchFavorites = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
         setFavoriteTrips([]);
-      } finally {
         setLoading(false);
+        return;
       }
-    };
+      const response = await getFavorites();
+      setFavoriteTrips(Array.isArray(response) ? response : []);
+    } catch (error) {
+      console.error("Failed to get favorites", error);
+      setFavoriteTrips([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchFavorites();
   }, []);
 
@@ -60,7 +59,7 @@ export function FavoritesProvider({ children }) {
 
   return (
     <FavoritesContext.Provider
-      value={{ favoriteTrips, loading, addFavorite, removeFavorite }}
+      value={{ favoriteTrips, loading, addFavorite, removeFavorite, fetchFavorites }}
     >
       <ToastContainer position="top-center" autoClose={2500} />
       {children}
